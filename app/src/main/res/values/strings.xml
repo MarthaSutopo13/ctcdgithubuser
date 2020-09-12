@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Ctcd GithubUser</string>
+    <string name="err_data_not_found">Data not found</string>
+    <string name="err_data_max_limit">Limit Max 10 hit. Please Waiting for 1 minute</string>
+</resources>

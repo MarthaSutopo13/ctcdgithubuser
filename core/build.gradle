@@ -1,0 +1,76 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion 29
+    buildToolsVersion "29.0.3"
+
+    defaultConfig {
+        minSdkVersion 22
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+        debug {
+            buildConfigField("String", "BASE_URL", "\"https://api.github.com\"")
+        }
+        release {
+            buildConfigField("String", "BASE_URL", "\"https://api.github.com\"")
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation 'androidx.core:core-ktx:1.3.1'
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
+    // # Networking
+    implementation "com.amitshekhar.android:rx2-android-networking:$rootProject.ext.rx2FastAndroidNetworking"
+
+    // # Logger
+    implementation "com.jakewharton.timber:timber:$rootProject.ext.timberVersion"
+
+    // Room
+    implementation "android.arch.persistence.room:runtime:$rootProject.ext.roomVersion"
+//    kapt "android.arch.persistence.room:compiler:$rootProject.ext.roomCompilerVersion"
+
+    // Room RxJava Support
+    implementation "android.arch.persistence.room:rxjava2:$rootProject.ext.roomVersion"
+
+    // Testing Room Migration
+    testImplementation "android.arch.persistence.room:testing:$rootProject.ext.roomVersion"
+
+    //Image
+    implementation 'com.squareup.picasso:picasso:2.71828'
+
+    //Rx
+    implementation "io.reactivex.rxjava2:rxjava:2.1.16"
+    implementation "io.reactivex.rxjava2:rxandroid:2.0.2"
+
+    // # Dependency Injection
+    implementation "com.google.dagger:dagger:$rootProject.dagger2Version"
+    kapt "com.google.dagger:dagger-compiler:$rootProject.dagger2Version"
+    kapt "com.google.dagger:dagger-android-processor:$rootProject.dagger2Version"
+    implementation "com.google.dagger:dagger-android-support:$rootProject.daggerAndroidSupportVersion"
+
+    //CORE
+    implementation "com.karumi:dexter:$rootProject.ext.dexterVersion"
+}
+
+repositories {
+    mavenCentral()
+}
